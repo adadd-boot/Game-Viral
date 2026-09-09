@@ -4,6 +4,7 @@
 <head>
 <meta content="en-us" http-equiv="Content-Language" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Gallery</title>
 <style type="text/css">
 .auto-style2 {
@@ -39,6 +40,55 @@
 }
 .auto-style13 {
 	border-right-width: 0px;
+}
+
+body {
+	margin: 0;
+	background-color: #07111f;
+	background-image: linear-gradient(rgba(4, 10, 20, 0.72), rgba(4, 10, 20, 0.9)), url('gog%20fode/1500700-3840x2160-desktop-4k-shooter-game-wallpaper-photo.jpg');
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	color: #ffffff;
+}
+
+@media screen and (max-width: 600px) {
+	body {
+		padding: 12px;
+		box-sizing: border-box;
+		overflow-x: hidden;
+	}
+
+	body table {
+		width: 100% !important;
+		table-layout: fixed;
+	}
+
+	body table td {
+		width: auto !important;
+		word-wrap: break-word;
+	}
+
+	body table:first-of-type tr {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	body table:first-of-type td:first-child {
+		display: none;
+	}
+
+	body table:first-of-type td {
+		flex: 1 1 auto;
+		text-align: center;
+	}
+
+	body img {
+		max-width: 100%;
+		height: auto;
+	}
 }
 </style>
 </head>
