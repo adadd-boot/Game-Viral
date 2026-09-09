@@ -35,7 +35,138 @@
 	color: #00FF00;
 	background-color: #000000;
 }
+
+.game-finder {
+	margin: 24px auto;
+	padding: 18px;
+	max-width: 900px;
+	border: 1px solid #00ff00;
+	background-color: rgba(0, 0, 0, 0.72);
+	color: #ffffff;
+}
+
+.game-finder h2 {
+	margin-top: 0;
+	color: #00ff00;
+}
+
+.game-finder-controls {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.game-finder input,
+.game-finder select,
+.game-finder button {
+	padding: 10px;
+	border: 1px solid #00ff00;
+	font: inherit;
+}
+
+.game-finder input {
+	flex: 1 1 260px;
+}
+
+.game-finder select,
+.game-finder button {
+	background-color: #000000;
+	color: #00ff00;
+	cursor: pointer;
+}
+
+.game-finder-status {
+	margin-bottom: 0;
+	color: #ffffff;
+}
+
+.game-finder-empty {
+	color: #ffcc00;
+}
+
+@media screen and (max-width: 600px) {
+	.game-finder-controls {
+		display: block;
+	}
+
+	.game-finder input,
+	.game-finder select,
+	.game-finder button {
+		width: 100%;
+		margin-bottom: 8px;
+	}
+}
 </style>
+<script type="text/javascript">
+function setupGameFinder() {
+	var searchInput = document.getElementById('game-search');
+	var platformSelect = document.getElementById('game-platform');
+	var status = document.getElementById('game-finder-status');
+	var entries = [];
+	var currentPlatform = 'Android';
+	var children = document.body.children;
+	var collecting = false;
+
+	for (var i = 0; i < children.length; i++) {
+		var child = children[i];
+		var text = child.textContent.toLowerCase();
+
+		if (child.id === 'game-finder') {
+			collecting = true;
+			continue;
+		}
+		if (child.id === 'site-footer') {
+			break;
+		}
+		if (!collecting) {
+			continue;
+		}
+		if (text.indexOf('ps2 games') !== -1) {
+			currentPlatform = 'PS2';
+			continue;
+		}
+		if (text.indexOf('ps3 games') !== -1) {
+			currentPlatform = 'PS3';
+			continue;
+		}
+		if (child.tagName.toLowerCase() === 'p' && child.textContent.replace(/\s/g, '') !== '') {
+			child.setAttribute('data-platform', currentPlatform);
+			entries.push(child);
+		}
+	}
+
+	function updateResults() {
+		var query = searchInput.value.toLowerCase().replace(/^\s+|\s+$/g, '');
+		var platform = platformSelect.value;
+		var visible = 0;
+
+		for (var i = 0; i < entries.length; i++) {
+			var entry = entries[i];
+			var matchesText = entry.textContent.toLowerCase().indexOf(query) !== -1;
+			var matchesPlatform = platform === 'all' || entry.getAttribute('data-platform') === platform;
+			var showEntry = matchesText && matchesPlatform;
+
+			entry.style.display = showEntry ? '' : 'none';
+			if (showEntry) {
+				visible++;
+			}
+		}
+
+		status.textContent = visible + ' game entries found';
+		status.className = 'game-finder-status' + (visible === 0 ? ' game-finder-empty' : '');
+	}
+
+	searchInput.oninput = updateResults;
+	platformSelect.onchange = updateResults;
+	document.getElementById('game-reset').onclick = function () {
+		searchInput.value = '';
+		platformSelect.value = 'all';
+		updateResults();
+	};
+	updateResults();
+}
+window.onload = setupGameFinder;
+</script>
 </head>
 
 <body style="background-color: #0000FF; background-image: url('gog%20fode/HD-wallpaper-astros-playroom-2020-astro-controller-dual-playstion-ps5-sense.jpg');">
@@ -63,8 +194,22 @@
 
 <p>
 &nbsp;<strong><marquee class="auto-style4">Aplace for all game links
-
 </marquee></strong></p>
+
+<section class="game-finder" id="game-finder">
+	<h2>Find a Game</h2>
+	<div class="game-finder-controls">
+		<input id="game-search" type="search" placeholder="Search by game name..." />
+		<select id="game-platform" title="Filter games by platform">
+			<option value="all">All platforms</option>
+			<option value="Android">Android</option>
+			<option value="PS2">PS2 for Android</option>
+			<option value="PS3">PS3 for Android</option>
+		</select>
+		<button id="game-reset" type="button">Reset</button>
+	</div>
+	<p class="game-finder-status" id="game-finder-status" aria-live="polite"></p>
+</section>
 
 <h2><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <span class="auto-style8">ANDRIOD</span></strong></h2>
