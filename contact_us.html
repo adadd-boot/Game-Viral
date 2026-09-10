@@ -182,17 +182,19 @@ body {
 		</strong><span class="auto-style10"><strong>Fill This Form For Any 
 		Inquiries or Feedback</strong></span><strong><br class="auto-style10" />
 		</strong>
-		<form action="" method="post">
-			<span class="auto-style10"><strong>Name</strong></span><strong><input class="auto-style10" name="Text1" style="width: 238px" type="text" /><br />
+		<form id="feedback-form">
+			<input name="_subject" type="hidden" value="New Game Vatural feedback" />
+			<input name="_captcha" type="hidden" value="false" />
+			<span class="auto-style10"><strong>Name</strong></span><strong><input class="auto-style10" name="name" required="required" style="width: 238px" type="text" /><br />
 			<br class="auto-style10" />
 			</strong><span class="auto-style10"><strong>Gender</strong></span><strong><input checked="checked" class="auto-style10" name="Radio1" type="radio" /></strong><span class="auto-style10"><strong>Male</strong></span><strong><input class="auto-style10" name="Radio1" type="radio" /></strong><span class="auto-style10"><strong>Female<br />
 			</strong></span><strong><br class="auto-style10" />
-			</strong><span class="auto-style10"><strong>Phone\Email</strong></span><strong><input class="auto-style10" name="Text2" style="width: 289px" type="text" /><br />
+			</strong><span class="auto-style10"><strong>Phone\Email</strong></span><strong><input class="auto-style10" name="contact" required="required" style="width: 289px" type="text" /><br />
 			<br class="auto-style10" />
 			</strong><span class="auto-style10"><strong>Produce\Link or Item 
 			Needed</strong></span><strong><br class="auto-style10" />
-			<input class="auto-style10" name="Checkbox1" type="checkbox" /></strong><span class="auto-style10"><strong>Gamelink</strong></span><strong><input class="auto-style10" name="Checkbox2" type="checkbox" /></strong><span class="auto-style10"><strong>Information</strong></span><strong><input class="auto-style10" name="Checkbox3" type="checkbox" /></strong><span class="auto-style10"><strong>GameFile 
-			or Other</strong></span><strong><input class="auto-style10" name="Text3" style="width: 209px" type="text" /><br />
+			<input class="auto-style10" name="request_type" type="checkbox" value="Gamelink" /></strong><span class="auto-style10"><strong>Gamelink</strong></span><strong><input class="auto-style10" name="request_type" type="checkbox" value="Information" /></strong><span class="auto-style10"><strong>Information</strong></span><strong><input class="auto-style10" name="request_type" type="checkbox" value="GameFile or Other" /></strong><span class="auto-style10"><strong>GameFile 
+			or Other</strong></span><strong><input class="auto-style10" name="item_needed" style="width: 209px" type="text" /><br />
 			<br class="auto-style10" />
 			</strong><span class="auto-style10"><strong>Type of Inquiry</strong></span><strong><br class="auto-style10" />
 			<select class="auto-style10" name="Select1" style="width: 83px">
@@ -205,7 +207,7 @@ body {
 			</select><br />
 			<br class="auto-style10" />
 			</strong><span class="auto-style10"><strong>YourFeedback</strong></span><strong><br class="auto-style10" />
-			<textarea class="auto-style9" name="TextArea1" rows="3" style="width: 293px"></textarea><br />
+			<textarea class="auto-style9" name="feedback" required="required" rows="3" style="width: 293px"></textarea><br />
 			<br class="auto-style10" />
 			<input class="auto-style10" name="Submit1" type="submit" value="Send Feedback" /></strong></form>
 		</td>
@@ -238,6 +240,24 @@ Town|+0772328062|</strong></p>
 <p class="auto-style5"><strong>&nbsp;Briansyc@gmailcom</strong></p>
 <p class="auto-style5"><strong>$ 2026 Gaming Vatural Center</strong></p>
 <p>&nbsp;</p>
+
+<script type="text/javascript">
+	document.getElementById('feedback-form').addEventListener('submit', function (event) {
+		event.preventDefault();
+		var form = event.target;
+		var types = Array.from(form.querySelectorAll('input[name="request_type"]:checked'))
+			.map(function (field) { return field.value; }).join(', ') || 'Not specified';
+		var message = [
+			'New Game Vatural feedback',
+			'Name: ' + form.elements.name.value,
+			'Contact: ' + form.elements.contact.value,
+			'Request type: ' + types,
+			'Item or link: ' + form.elements.item_needed.value,
+			'Feedback: ' + form.elements.feedback.value
+		].join('\n');
+		window.location.href = 'https://wa.me/256772328062?text=' + encodeURIComponent(message);
+	});
+</script>
 
 </body>
 
