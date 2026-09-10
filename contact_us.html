@@ -182,7 +182,7 @@ body {
 		</strong><span class="auto-style10"><strong>Fill This Form For Any 
 		Inquiries or Feedback</strong></span><strong><br class="auto-style10" />
 		</strong>
-		<form id="feedback-form">
+		<form id="feedback-form" action="https://wa.me/256772328062" method="get" onsubmit="return sendFeedback(this);">
 			<input name="_subject" type="hidden" value="New Game Vatural feedback" />
 			<input name="_captcha" type="hidden" value="false" />
 			<span class="auto-style10"><strong>Name</strong></span><strong><input class="auto-style10" name="name" required="required" style="width: 238px" type="text" /><br />
@@ -242,9 +242,7 @@ Town|+0772328062|</strong></p>
 <p>&nbsp;</p>
 
 <script type="text/javascript">
-	document.getElementById('feedback-form').addEventListener('submit', function (event) {
-		event.preventDefault();
-		var form = event.target;
+	function sendFeedback(form) {
 		var types = Array.from(form.querySelectorAll('input[name="request_type"]:checked'))
 			.map(function (field) { return field.value; }).join(', ') || 'Not specified';
 		var message = [
@@ -256,7 +254,8 @@ Town|+0772328062|</strong></p>
 			'Feedback: ' + form.elements.feedback.value
 		].join('\n');
 		window.location.href = 'https://wa.me/256772328062?text=' + encodeURIComponent(message);
-	});
+		return false;
+	}
 </script>
 
 </body>
