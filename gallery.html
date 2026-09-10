@@ -42,6 +42,43 @@
 	border-right-width: 0px;
 }
 
+.gaming-videos {
+	margin: 16px auto;
+	max-width: 700px;
+}
+
+.gaming-videos h2 {
+	color: #00FF00;
+}
+
+.video-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: center;
+}
+
+.video-card {
+	flex: 1 1 260px;
+	max-width: 300px;
+}
+
+.video-card video {
+	width: 100%;
+	max-height: 170px;
+	background-color: #000;
+}
+
+.video-missing {
+	margin: 0;
+	padding: 14px;
+	background: #2b1111;
+	border: 1px solid #c94b4b;
+	color: #ffd8d8;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+}
+
 body {
 	margin: 0;
 	background-color: #07111f;
@@ -136,6 +173,54 @@ body {
 			<img alt="" height="55%" src="gog%20fode/420-2560x1700-desktop-hd-call-of-duty-wallpaper-photo.jpg" width="22%" /></td>
 		</tr>
 	</table>
+	<section class="gaming-videos">
+		<h2>Gaming Videos</h2>
+		<p class="video-missing" hidden>Video files are missing. Keep this page together with its <strong>videos</strong> folder when copying the project.</p>
+		<div class="video-grid">
+			<div class="video-card">
+				<h3>Mastering the Art of Hitman Sniper Mobile</h3>
+				<video controls preload="metadata">
+					<source src="videos/hitman-sniper-gameplay.mp4" type="video/mp4" />
+					<a href="videos/hitman-sniper-gameplay.mp4">Download video</a>
+				</video>
+			</div>
+			<div class="video-card">
+				<h3>Halo Combat Has Evolved</h3>
+				<video controls preload="metadata">
+					<source src="videos/halo-combat-evolved.mp4" type="video/mp4" />
+					<a href="videos/halo-combat-evolved.mp4">Download video</a>
+				</video>
+			</div>
+			<div class="video-card">
+				<h3>Call of Duty MW3 Android Gameplay</h3>
+				<video controls preload="metadata">
+					<source src="videos/call-of-duty-mw3.mp4" type="video/mp4" />
+					<a href="videos/call-of-duty-mw3.mp4">Download video</a>
+				</video>
+			</div>
+			<div class="video-card">
+				<h3>The Last of Us Mobile</h3>
+				<video controls preload="metadata">
+					<source src="videos/last-of-us-mobile.mp4" type="video/mp4" />
+					<a href="videos/last-of-us-mobile.mp4">Download video</a>
+				</video>
+			</div>
+			<div class="video-card">
+				<h3>COD Black Ops 2 Android</h3>
+				<video controls preload="metadata">
+					<source src="videos/cod-black-ops-2-android.mp4" type="video/mp4" />
+					<a href="videos/cod-black-ops-2-android.mp4">Download video</a>
+				</video>
+			</div>
+			<div class="video-card">
+				<h3>Android Gaming Controller Test</h3>
+				<video controls preload="metadata">
+					<source src="videos/blur-android-gaming.mp4" type="video/mp4" />
+					<a href="videos/blur-android-gaming.mp4">Download video</a>
+				</video>
+			</div>
+		</div>
+	</section>
 	<div class="auto-style9">
 		<br />
 		Modern combat 3</div>
@@ -206,6 +291,18 @@ Town|+0772328062|</strong></p>
 <p class="auto-style5"><strong>&nbsp;Briansyc@gmailcom</strong></p>
 <p class="auto-style5"><strong>$ 2026 Gaming Vatural Center</strong></p>
 </div>
+
+<script type="text/javascript">
+	document.querySelectorAll('.video-card video').forEach(function (video) {
+		video.addEventListener('error', function () {
+			var message = document.querySelector('.video-missing');
+			if (message) {
+				message.hidden = false;
+			}
+			video.hidden = true;
+		});
+	});
+</script>
 
 </body>
 
